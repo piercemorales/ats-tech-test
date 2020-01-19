@@ -1,4 +1,4 @@
-.categories {
+/* .categories {
   display: flex;
   justify-content: space-evenly;
 }
@@ -6,4 +6,14 @@
 .clientInformation {
   display: flex;
   justify-content: space-around;
+} */
+
+table,th,td  {
+  border: 1px solid black;
+}
+
+td, th {
+  width: 150px;
+  margin: 0px 20px;
+  text-align: center;
 }

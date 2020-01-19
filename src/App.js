@@ -4,8 +4,9 @@ import CSVReader from 'react-csv-reader'
 // access the csv file from input type
 // parse the information into arrays
 // display information on the page
-// make a button that displays next 10 clients
-// dispaly more button
+// make an option where user can choose how many they can display that displays next 10 clients
+// make a next/previous page button
+// search option (name,car model,year, etc)
 
 
 
@@ -19,12 +20,14 @@ class App extends Component {
     }
   }
 
-  showMore = (e) => {
-    this.setState({
-      dataContent: this.state.dataContent.push(11, 21)
+  nextBtn = (e) => {
 
-    })
-    console.log(this.state.dataContent);
+    console.log(this.state.dataContent.push(10, 30));
+  }
+
+  componentDidMount(){
+    
+
   }
 
   render() {
@@ -35,36 +38,34 @@ class App extends Component {
           label="Input CSV File"
           onFileLoaded={data => {
             this.setState({
+              dataCategory: data[0],
               dataContent: data.slice(1, 11),
-              dataCategory: data[0]
             });
-            return <button onClick={this.showMore}>Show More</button>;
           }}
           onError={data => {
             console.log(data);
           }}
-          inputId="ObiWan"
           inputStyle={{ color: "blue" }}
         />
-
-        <section className="information">
-          <div className="categories">
+        <table>
+          <thead className="categories">
+            <tr>
             {this.state.dataCategory.map((value, key) => {
-              console.log(value, key);
-              return <p key={key}>{value}</p>;
+              return <th key={key}>{value}</th>
             })}
-          </div>
-          {this.state.dataContent.map((value, index) => {
+            </tr>
+          </thead>
+          <tbody>
+          {this.state.dataContent.map((value, key) => {
             return (
-              <div className="clientInformation">
-                {value.map(info => (
-                  <p>{info}</p>
-                ))}
-              </div>
+              <tr key={key} className="clientInformation">
+                {value.map((info,key) => ( <td key={key}>{info}</td> ))}
+              </tr>
             );
           })}
-          <button onClick={this.showMore}>Next</button>
-        </section>
+          </tbody>
+        </table>
+          <button onClick={this.nextBtn}>Next</button>
       </div>
     );
       
